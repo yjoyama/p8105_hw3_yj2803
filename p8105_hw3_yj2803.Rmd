@@ -6,17 +6,36 @@ output: github_document
 ---
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
+knitr::opts_chunk$set(collapse = TRUE, message = FALSE)
 
 library(tidyverse)
 ```
 
 # Problem 1
 
-Data import setup
+**Data import setup**
 ```{r}
 library(p8105.datasets)
-data("instacart") # call instacart data from the library
+data("instacart") # call instacart data from the library 
 ```
+
+The instacart data has `r nrow(instacart)` rows and `r ncol(instacart)` columns. Some key variables include order_id, product_id, user_id, product_name, etc.
+
+**Examples of observations in instacart dataset**
+```{r}
+head(instacart, n = 8) |> 
+  knitr::kable(digits = 1)
+```
+
+The above example shows detailed information about `order_id` = 1. As we can see from the table, `order_id` is tied to specific IDs which identify product, user, aisle and department. From `product_name`, we can tell what the user got for this order. `order_number` = 4 means that this was the 4th order from this customer. `order_dow`, `order_hour_of_day`, and `days_since_prior` tell us that this order was placed on the 4th week, between 10 am to 11 am, and 9 days since the last order. `reordered` is recorded as 1 if the product has been ordered by this user in the past, and 0 otherwise. 
+
+
+
+
+
+
+
+
+
 
 
