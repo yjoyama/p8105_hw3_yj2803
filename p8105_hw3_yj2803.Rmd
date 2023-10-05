@@ -29,7 +29,20 @@ head(instacart, n = 8) |>
 
 The above example shows detailed information about `order_id` = 1. As we can see from the table, `order_id` is tied to specific IDs which identify product, user, aisle and department. From `product_name`, we can tell what the user got for this order. `order_number` = 4 means that this was the 4th order from this customer. `order_dow`, `order_hour_of_day`, and `days_since_prior` tell us that this order was placed on the 4th week, between 10 am to 11 am, and 9 days since the last order. `reordered` is recorded as 1 if the product has been ordered by this user in the past, and 0 otherwise. 
 
+* Aisles
+```{r}
+# summarize aisle data
+df_aisles <- instacart |> 
+  group_by(aisle_id, aisle) |> 
+  summarise(count = n())  # count how many times aisle_id were recorded in the dataset for each id (= the number of items ordered from each aisle)
 
+max_aisle <- max(pull(df_aisles, count)) # check maximum count of aisles
+
+df_aisles_max <- df_aisles |> 
+  filter(count == max_aisle) # filter by the maximum count of aisles
+```
+
+`r max(pull(instacart, aisle_id))` aisles are in this dataset, and `r pull(df_aisles_max, aisle)`are the most items (in total `r max_aisle` items) ordered from.
 
 
 
