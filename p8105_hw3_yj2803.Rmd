@@ -104,7 +104,36 @@ df_packaged_vegetables_fruits |>
 ```
 The three most popular items in "packaged vegetables fruits" are `r pull(df_packaged_vegetables_fruits, product_name)`.
 
+The table below provides the mean order time for Pink Lady Apples and Coffee Ice Cream on each day of the week:
 
+**Pink Lady Apples**
+```{r warning = FALSE}
+# Pink Lady Apples and Coffee Ice Cream table
+pink_lady_apples <- instacart |> 
+  filter(product_name == c("Pink Lady Apples")) |> # filter by product name
+  select(-product_name) |> 
+  group_by(order_dow) |> 
+  summarise("mean_hour" = mean(order_hour_of_day)) # show the mean hour of the day on each day of the week
+
+pink_lady_apples |> 
+  knitr::kable(digits = 1) # show table in md file 
+```
+
+**Coffee Ice Cream**
+```{r warning = FALSE}
+# Pink Lady Apples and Coffee Ice Cream table
+coffee_ice_cream <- instacart |> 
+  filter(product_name == c("Coffee Ice Cream")) |> # filter by product name
+  select(-product_name) |> 
+  group_by(order_dow) |> 
+  summarise("mean_hour" = mean(order_hour_of_day)) # show the mean hour of the day on each day of the week
+
+
+coffee_ice_cream |> 
+  knitr::kable(digits = 1) # show table in md file 
+```
+
+# Problem 2
 
 
 
