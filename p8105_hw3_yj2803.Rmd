@@ -24,12 +24,11 @@ The instacart data has `r nrow(instacart)` rows and `r ncol(instacart)` columns.
 **Examples of observations in instacart dataset**
 ```{r}
 head(instacart, n = 8) |> 
-  knitr::kable(digits = 1)
+  knitr::kable(digits = 1) # include table in the md file
 ```
 
 The above example shows detailed information about `order_id` = 1. As we can see from the table, `order_id` is tied to specific IDs which identify product, user, aisle and department. From `product_name`, we can tell what the user got for this order. `order_number` = 4 means that this was the 4th order from this customer. `order_dow`, `order_hour_of_day`, and `days_since_prior` tell us that this order was placed on the 4th week, between 10 am to 11 am, and 9 days since the last order. `reordered` is recorded as 1 if the product has been ordered by this user in the past, and 0 otherwise. 
 
-* Aisles
 ```{r}
 # summarize aisle data
 df_aisles <- instacart |> 
@@ -42,8 +41,23 @@ df_aisles_max <- df_aisles |>
   filter(count == max_aisle) # filter by the maximum count of aisles
 ```
 
-`r max(pull(instacart, aisle_id))` aisles are in this dataset, and `r pull(df_aisles_max, aisle)`are the most items (in total `r max_aisle` items) ordered from.
+`r max(pull(instacart, aisle_id))` aisles are in this dataset, and **`r pull(df_aisles_max, aisle)`** are the most items (in total `r max_aisle` items) ordered from.
 
+The following plot shows the number of items ordered in each aisle, limiting this to aisles with more than 10000 items ordered.
+```{r}
+# make a plot (the number of items ordered in each aisle)
+df_aisles |> 
+  filter(count > 10000) |> # just show aisles with more than 10000 items 
+  ggplot(aes(x = reorder(aisle, count), y = count)) + 
+  geom_bar(stat = "identity") +
+  theme(axis.text.x = element_text(angle = 90)) +
+  labs(
+    title = "Items by aisle",
+    x = "Aisle",
+    y = "Item count",
+    caption = "Only showing aisles with more than 10000 items ordered; sorted in an ascending order"
+  )
+```
 
 
 
