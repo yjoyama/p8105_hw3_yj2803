@@ -171,7 +171,7 @@ df_brfss_2010 <- df_brfss_cleaned |>
 
 7 or more locations were observed in `r pull(df_brfss_2002, locationabbr)` in 2002; `r pull(df_brfss_2010, locationabbr)` in 2010.
 
-- Construct a dataset that is limited to Excellent responses, and contains, year, state, and a variable that averages the data_value across locations within a state. Make a “spaghetti” plot of this average value over time within a state (that is, make a plot showing a line for each state across years).
+- Construct a dataset that is limited to `Excellent` responses, and contains, year, state, and a variable that averages the `data_value` across locations within a state. Make a “spaghetti” plot of this average value over time within a state (that is, make a plot showing a line for each state across years).
 
 ```{r fig.width = 12, fig.height = 6}
 # create a dataset that is limited to "Excellent" responses
@@ -198,6 +198,7 @@ df_brfss_excellent |>
   )
 ```
 
+- Make a two-panel plot showing, for the years 2006, and 2010, distribution of `data_value` for responses (“Poor” to “Excellent”) among locations in NY State.
 
 
 
