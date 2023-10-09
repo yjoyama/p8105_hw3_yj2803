@@ -135,7 +135,17 @@ coffee_ice_cream |>
 
 # Problem 2
 
+**Data import setup**
+```{r}
+library(p8105.datasets)
+data("brfss_smart2010") # call BRFSS data from the library 
+```
 
+**Data cleaning**
+```{r}
+df_brfss_cleaned <- brfss_smart2010 |> 
+  janitor::clean_names()
+```
 
 
 
