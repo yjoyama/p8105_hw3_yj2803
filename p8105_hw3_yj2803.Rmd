@@ -59,6 +59,64 @@ df_aisles |>
   )
 ```
 
+**Popular items in "baking ingredients"**
+```{r}
+# table showing the three most popular items in "baking ingredients"
+df_baking_ingredients <- instacart |> 
+  filter(aisle == c("baking ingredients")) |> # filter by aisle
+  group_by(product_name) |> 
+  summarise(count = n()) |> # add count for each item
+  arrange(desc(count)) |> # arrange in descending order
+  head(n = 3) # only show the first three items
+  
+df_baking_ingredients |> 
+  knitr::kable(digits = 1) # show table in md file 
+```
+The three most popular items in "baking ingredients" are `r pull(df_baking_ingredients, product_name)`.
+
+**Popular items in "dog food care"**
+```{r}
+# table showing the three most popular items in "dog food care"
+df_dog_food_care <- instacart |> 
+  filter(aisle == c("dog food care")) |> # filter by aisle
+  group_by(product_name) |> 
+  summarise(count = n()) |> # add count for each item
+  arrange(desc(count)) |> # arrange in descending order
+  head(n = 3) # only show the first three items
+  
+df_dog_food_care |> 
+  knitr::kable(digits = 1) # show table in md file 
+```
+The three most popular items in "dog food care" are `r pull(df_dog_food_care, product_name)`.
+
+**Popular items in "packaged vegetables fruits"**
+```{r}
+# table showing the three most popular items in "packaged vegetables fruits"
+df_packaged_vegetables_fruits <- instacart |> 
+  filter(aisle == c("packaged vegetables fruits")) |> # filter by aisle
+  group_by(product_name) |> 
+  summarise(count = n()) |> # add count for each item
+  arrange(desc(count)) |> # arrange in descending order
+  head(n = 3) # only show the first three items
+  
+df_packaged_vegetables_fruits |> 
+  knitr::kable(digits = 1) # show table in md file 
+```
+The three most popular items in "packaged vegetables fruits" are `r pull(df_packaged_vegetables_fruits, product_name)`.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
