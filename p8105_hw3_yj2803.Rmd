@@ -272,7 +272,7 @@ df_mims_cleaned |>
   ) |> 
   knitr::kable(digits = 1)
 ```
-The table shows the number of men and women in each education category.
+The table shows the number of men and women in each education category. The number of people who received more than high school education was the largest in both sex.
 
 **The age distribution**
 ```{r warning = F, fig.width = 12, fig.height = 6}
