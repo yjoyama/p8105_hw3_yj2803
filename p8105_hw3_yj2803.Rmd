@@ -259,10 +259,47 @@ df_accel = read_csv("./data/nhanes_accel.csv") |> # import csv file
 # merge the two datasets
 df_mims_cleaned =  
   left_join(df_covar, df_accel, by = "seqn")
-
 ```
 
+**The number of men and women in each educaiton category**
+```{r}
+df_mims_cleaned |> 
+  group_by(sex, education) |> # group by sex and education
+  summarise(count = n()) |> 
+  pivot_wider( # change the table from long to wide
+    names_from = education, 
+    values_from = count
+  ) |> 
+  knitr::kable(digits = 1)
+```
+The table shows the number of men and women in each education category.
 
+**The age distribution**
+```{r warning = F, fig.width = 12, fig.height = 6}
+# male
+age_male = df_mims_cleaned |> 
+  filter(sex == "male") |> 
+  ggplot(aes(x = education, y = age)) +
+  geom_boxplot(aes(fill = education), alpha = .5) + # make a boxplot for male
+  labs(
+    title = "Male"
+  ) +
+  theme(legend.position = "bottom") +
+  viridis::scale_fill_viridis(discrete = TRUE)
+  
+# female
+age_female = df_mims_cleaned |> 
+  filter(sex == "female") |> 
+  ggplot(aes(x = education, y = age)) +
+  geom_boxplot(aes(fill = education), alpha = .5) + # make a boxplot for female
+  labs(
+    title = "Female"
+  ) +
+  theme(legend.position = "bottom") +
+  viridis::scale_fill_viridis(discrete = TRUE)
 
+age_male + age_female # combine two graphs
+```
+The boxplot shows that among male, the lower the education level is, the older the age is. Among female, those who received high school equivalent education appears to have the highest median age.
 
 
