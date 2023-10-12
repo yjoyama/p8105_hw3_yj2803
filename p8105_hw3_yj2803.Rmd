@@ -327,12 +327,9 @@ df_mims_cleaned |>
 **24-hour activity time courses**
 ```{r warning = F, fig.width = 12, fig.height = 6}
 df_mims_cleaned |> 
-  group_by(min, sex, education) |> 
-  mutate(
-    total_values = sum(mims_values) 
-  ) |> # added a column that sums up mims_values for each individual
-  ggplot(aes(x = min, y = total_values, color = sex)) +
-  geom_point(alpha = .1) +
+  group_by(seqn, min) |> 
+  ggplot(aes(x = min, y = mims_values, color = sex)) +
+  geom_point(alpha = .5) +
   geom_smooth(se = F) +
   facet_grid(~ education) +
   labs(
@@ -340,24 +337,6 @@ df_mims_cleaned |>
     y = "total activity value"
   ) +
   theme(legend.position = "bottom") +
-  viridis::scale_color_viridis(
-    discrete = TRUE
-  )
-  
-df_mims_cleaned |> 
-  mutate(hour = min %/% 60) |> 
-  group_by(hour, sex, education) |> 
-  mutate(total_values = sum(mims_values)) |> 
-  ggplot(aes(x = hour, y = total_values, color = sex)) +
-  geom_point(alpha = .1) +
-  geom_smooth(se = F) +
-  facet_grid(~ education) +
-  labs(
-    title = "24-hour activity activity time courses of the day",
-    y = "total activity value"
-  ) +
-  theme(legend.position = "bottom") +
-  scale_x_continuous(limits = c(0, 24)) +
   viridis::scale_color_viridis(
     discrete = TRUE
   )
