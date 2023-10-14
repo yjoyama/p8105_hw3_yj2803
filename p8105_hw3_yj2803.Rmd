@@ -328,25 +328,10 @@ The graph shows total activity value against age in each sex and education level
 **24-hour activity time courses**
 ```{r warning = F, fig.width = 12, fig.height = 6}
 df_mims_cleaned |> 
-  group_by(seqn, min) |> 
-  ggplot(aes(x = min, y = mims_values, color = sex)) +
-  geom_point(alpha = .5) +
-  geom_smooth(se = F) +
-  facet_grid(~ education) +
-  labs(
-    title = "24-hour activity activity time courses of the day",
-    y = "activity value"
-  ) +
-  theme(legend.position = "bottom") +
-  viridis::scale_color_viridis(
-    discrete = TRUE
-  )
-
-df_mims_cleaned |> 
   group_by(min, sex, education) |> 
   summarise(avg_mims_values = mean(mims_values)) |> 
   ggplot(aes(x = min, y = avg_mims_values, color = sex)) +
-  geom_point(alpha = .5) +
+  geom_point(alpha = .05) +
   geom_smooth(se = F) +
   facet_grid(~ education) +
   labs(
